@@ -29,7 +29,7 @@ The concrete compressive strength is the regression problem. The order of this l
 
 Name -- Data Type -- Measurement -- Description
 
-Cement (component 1) -- quantitative -- kg in a m3 mixture -- Input Variable $\\$
+Cement (component 1) -- quantitative -- kg in a m3 mixture -- Input Variable \\
 Blast Furnace Slag (component 2) -- quantitative -- kg in a m3 mixture -- Input Variable $\\$
 Fly Ash (component 3) -- quantitative  -- kg in a m3 mixture -- Input Variable $\\$
 Water  (component 4) -- quantitative  -- kg in a m3 mixture -- Input Variable $\\$
