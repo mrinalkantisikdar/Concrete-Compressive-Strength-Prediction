@@ -1,4 +1,4 @@
-## Kaggle Mushroom Classification End To End ML Project
+## Concrete Compressive Strength Prediction End To End ML Project
 
 ### Create environment
 ```
@@ -10,17 +10,31 @@ conda activate venv/
 ```
 pip install -r requirements.txt
 ```
-Mushroom-Classification-iNeuron-Internship
+Concrete Compressive Strength Prediction-iNeuron-Internship
 
 ### Application url
 
-http://mushroomclassificationtest-env.eba-jxp3wzij.eu-north-1.elasticbeanstalk.com/predict
+
 
 
 ### Dataset url:
-https://www.kaggle.com/datasets/uciml/mushroom-classification
+https://www.kaggle.com/datasets/elikplim/concrete-compressive-strength-data-set
 
 ## Context
-```
-Although this dataset was originally contributed to the UCI Machine Learning repository nearly 30 years ago, mushroom hunting (otherwise known as "shrooming") is enjoying new peaks in popularity. Learn which features spell certain death and which are most palatable in this dataset of mushroom characteristics. And how certain can your model be?
+Concrete is the most important material in civil engineering. The concrete compressive strength is a highly nonlinear function of age and ingredients.
 
+### Attribute Information
+
+The concrete compressive strength is the regression problem. The order of this listing corresponds to the order of numerals along the rows of the database. 
+
+Name -- Data Type -- Measurement -- Description
+
+Cement (component 1) -- quantitative -- kg in a m3 mixture -- Input Variable $\\$
+Blast Furnace Slag (component 2) -- quantitative -- kg in a m3 mixture -- Input Variable $\\$
+Fly Ash (component 3) -- quantitative  -- kg in a m3 mixture -- Input Variable $\\$
+Water  (component 4) -- quantitative  -- kg in a m3 mixture -- Input Variable $\\$
+Superplasticizer (component 5) -- quantitative -- kg in a m3 mixture -- Input Variable  $\\$
+Coarse Aggregate  (component 6) -- quantitative -- kg in a m3 mixture -- Input Variable $\\$
+Fine Aggregate (component 7)	 -- quantitative  -- kg in a m3 mixture -- Input Variable $\\$
+Age -- quantitative  -- Day (1~365) -- Input Variable $\\$
+Concrete compressive strength -- quantitative -- MPa -- Output Variable $\\$
