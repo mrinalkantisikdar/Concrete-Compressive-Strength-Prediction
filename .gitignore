@@ -128,14 +128,11 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+secure-connect-concrete-strength.zip
 concrete_strength-token.json
-secure-connect-concrete-strength.zip
 
-src\concrete_strength-token.json
-secure-connect-concrete-strength.zip
-
-src\components\concrete_strength-token.json
-src\components\secure-connect-concrete-strength.zip
+src/components/concrete_strength-token.json
+src/components/secure-connect-concrete-strength.zip
 
 notebooks/concrete_strength-token.json
 notebooks/secure-connect-concrete-strength.zip
