@@ -128,11 +128,15 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-mushrooms_token_datastax_cassandra.json
-secure-connect-mushrooms.zip
+concrete_strength-token.json
+secure-connect-concrete-strength.zip
 
-src\mushrooms_token_datastax_cassandra.json
-src\secure-connect-mushrooms.zip
+src\concrete_strength-token.json
+secure-connect-concrete-strength.zip
 
-src\components\mushrooms_token_datastax_cassandra.json
-src\components\mushrooms_token_datastax_cassandra.json
+src\components\concrete_strength-token.json
+src\components\secure-connect-concrete-strength.zip
+
+notebooks/concrete_strength-token.json
+notebooks/secure-connect-concrete-strength.zip
+
