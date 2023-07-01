@@ -137,3 +137,4 @@ src/components/secure-connect-concrete-strength.zip
 notebooks/concrete_strength-token.json
 notebooks/secure-connect-concrete-strength.zip
 
+/config/workspace/notebooks/concrete_data.csv
