@@ -10,6 +10,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import PowerTransformer
 from sklearn.feature_selection import SelectKBest, chi2
 
 from scipy.sparse import csr_matrix
@@ -32,40 +33,25 @@ class DataTransformation:
     def __init__(self):
         self.data_transformation_config=DataTransformationConfig()
 
-    def target_encode(self, df):
-        try:
-            logging.info('target encoding initiated')
-            target_map= {
-                "p": 0, 
-                "e": 1
-                }
-            df= df['classs'].map(target_map)
-            return df
-        except Exception as e:
-            logging.info("Error in target encoding")
-            raise CustomException(e,sys)
-
 
     def get_data_transformation_object(self):
         try:
 
-            categorical_cols = ['cap_surface', 'bruises', 'gill_spacing', 'gill_size', 'gill_color',
-            'stalk_root', 'stalk_surface_above_ring', 'stalk_surface_below_ring',
-            'ring_type', 'spore_print_color', 'population', 'habitat'] # keeping only the important columns for our model
+            numerical_cols = ['cement', 'blast_furnace_slag', 'fly_ash', 'water', 'superplasticizer', 'coarse_aggregate', 'fine_aggregate', 'age']
 
 
-            # Categorigal Pipeline
-            cat_pipeline=Pipeline(
+            # Numerical Pipeline
+            num_pipeline=Pipeline(
                 steps=[
-                ('imputer',SimpleImputer(strategy='most_frequent')),
-                ('onehotencoder',OneHotEncoder(handle_unknown='ignore', drop= 'first', sparse_output= True))
-                # no need to standardize after get dummies
+                ('imputer',SimpleImputer(strategy='median')),
+                ('pt', PowerTransformer()),
+                ('scaler',StandardScaler())
                 ]
 
             )
             # combine target and catagorical pipeline
             preprocessor=ColumnTransformer([
-            ('cat_pipeline',cat_pipeline,categorical_cols)
+            ('num_pipeline',num_pipeline,numerical_cols)
             ], remainder ='passthrough', n_jobs=-1)
             return preprocessor
 
@@ -93,16 +79,15 @@ class DataTransformation:
             # feature engineering
 
             ## Trnasformating X using preprocessor obj
-            categorical_cols = ['cap_surface', 'bruises', 'gill_spacing', 'gill_size', 'gill_color',
-            'stalk_root', 'stalk_surface_above_ring', 'stalk_surface_below_ring',
-            'ring_type', 'spore_print_color', 'population', 'habitat'] # keeping only the important columns for our model
+            numerical_cols = ['cement', 'blast_furnace_slag', 'fly_ash', 'water', 'superplasticizer', 'coarse_aggregate', 'fine_aggregate', 'age']
 
-            X_train_arr=preprocessing_obj.fit_transform(X_train_df[categorical_cols])
-            X_test_arr=preprocessing_obj.transform(X_test_df[categorical_cols])
+
+            X_train_arr=preprocessing_obj.fit_transform(X_train_df[numerical_cols])
+            X_test_arr=preprocessing_obj.transform(X_test_df[numerical_cols])
 
             # Transforming y using target encode:
-            y_train_arr=self.target_encode(y_train_df)
-            y_test_arr=self.target_encode(y_test_df)
+            y_train_arr=y_train_df.to_numpy()
+            y_test_arr=y_test_df.to_numpy()
             #y_train_arr= pd.get_dummies(y_train_df, drop_first= True)
             #y_test_arr= pd.get_dummies(y_test_df, drop_first= True)
 

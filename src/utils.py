@@ -60,7 +60,7 @@ def load_object(file_path): # to load pickle file
         raise CustomException(e,sys)
 
 def connect_database():
-    file_path= os.path.join(os.getcwd(),'mushrooms_token_datastax_cassandra.json')
+    file_path= os.path.join(os.getcwd(),'concrete_strength-token.json')
     with open(file_path) as f:
         file= json.load(f)
         id= file["clientId"]
@@ -68,13 +68,13 @@ def connect_database():
 
     try: 
         cloud_config= {
-        'secure_connect_bundle': os.path.join(os.getcwd(), 'secure-connect-mushrooms.zip')
+        'secure_connect_bundle': os.path.join(os.getcwd(), 'secure-connect-concrete-strength.zip')
                     }
         auth_provider = PlainTextAuthProvider(id, secret)
         cluster = Cluster(cloud=cloud_config, auth_provider=auth_provider)
-        session= cluster.connect('ineuron_mlprojects')
+        session= cluster.connect('concrete_strength')
 
-        data = session.execute("SELECT * FROM mushroom_csv;")
+        data = session.execute("SELECT * FROM concrete_strength_csv;")
         return data
     except Exception as e:
         logging.info('Exception Occured in connect_database function utils')

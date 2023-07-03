@@ -4,6 +4,7 @@ from src.logger import logging
 from src.exception import CustomException
 import pandas as pd
 import numpy as np
+from scipy import stats
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass # when you just need to create a class variable and not any functionalities
 
@@ -32,16 +33,16 @@ class DataIngestion:
         logging.info('Data Ingestion methods Starts')
         try:
             df = pd.DataFrame([d for d in connect_database()]) # read data from local, mongodb, sql (write all these generic codes in utils)
-            df = df.iloc[:-1 , :] # # By using iloc[] to select all rows except the last row
-            df["stalk_root"]= df["stalk_root"].replace('?', np.nan)
+            df = df.iloc[: , :] #  using iloc[] to select all rows and columns
+            df[(np.abs(stats.zscore(df)) < 3).all(axis=1)]  # removing outliers
             logging.info('Dataset read as pandas Dataframe')
 
             os.makedirs(os.path.dirname(self.ingestion_config.raw_data_path),exist_ok=True) # make directory, if already exists don't worry
             df.to_csv(self.ingestion_config.raw_data_path,index=False) # this file will be created
             logging.info('Train test split')
-            X=df.drop(labels=['classs'], axis=1)
-            y=df['classs']
-            X_train, X_test, y_train, y_test=train_test_split(X, y,test_size=0.20,random_state=42, stratify= y)
+            X=df.drop(labels=['concrete_compressive_strength'], axis=1)
+            y=df['concrete_compressive_strength']
+            X_train, X_test, y_train, y_test=train_test_split(X, y,test_size=0.20,random_state=42)
             # EDA is done before hand in notebooks, this is test train split
 
             X_train.to_csv(self.ingestion_config.X_train_data_path,index=False,header=True)     # create train test data files
@@ -64,13 +65,13 @@ class DataIngestion:
             raise CustomException(e,sys)
 
 
-'''
+
 if __name__=='__main__':
     obj=DataIngestion()
     X_train_data_path, X_test_data_path, y_train_data_path, y_test_data_path=obj.initiate_data_ingestion()
     data_transformation= DataTransformation()
     X_train_arr, X_test_arr, y_train_arr, y_test_arr,_= data_transformation.initaite_data_transformation(X_train_data_path, X_test_data_path, y_train_data_path, y_test_data_path)
-'''
+
 
 
 
