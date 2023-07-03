@@ -3,9 +3,12 @@ import numpy as np
 import pandas as pd
 from scipy.sparse import csr_matrix
 ## Model Training
-from xgboost import XGBClassifier
-from sklearn.svm import SVC        # models
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LinearRegression, Lasso,Ridge,ElasticNet   
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.svm import SVR
+from sklearn.model_selection import GridSearchCV
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, AdaBoostRegressor
+from sklearn.metrics import r2_score,mean_absolute_error,mean_squared_error 
 
 from src.exception import CustomException
 from src.logger import logging
@@ -38,9 +41,15 @@ class ModelTrainer:
             )
 
             models={
-            'xgboost':XGBClassifier(),
-            'svc':SVC(),
-            'rfc':RandomForestClassifier(),
+                'lr': LinearRegression(),
+                'las': Lasso(),
+                'rid': Ridge(),
+                'eln': ElasticNet(),
+                'dtr': DecisionTreeRegressor(),
+                'svr': SVR(),
+                'rfr': RandomForestRegressor(),
+                'gbr': GradientBoostingRegressor(),
+                'abr': AdaBoostRegressor()
             }
             
             model_report:dict=evaluate_model(X_train,y_train,X_test,y_test,models)

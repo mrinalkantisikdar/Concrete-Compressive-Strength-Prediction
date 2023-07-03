@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import json
 #from sklearn import metrics
-from sklearn.metrics import r2_score, classification_report, confusion_matrix, accuracy_score     # parameters
+from sklearn.metrics import r2_score,mean_absolute_error,mean_squared_error 
 
 from cassandra.cluster import Cluster
 from cassandra.auth import PlainTextAuthProvider

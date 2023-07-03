@@ -20,31 +20,21 @@ def predict_datapoint():        # this funciton will also be present in form.htm
     
     else:
         data=CustomData(
-            cap_surface = request.form.get('cap_surface'), # don't need to convert to float since catagorical data form drop down menu
-            bruises= request.form.get('bruises'),
-            gill_spacing = request.form.get('gill_spacing'),
-            gill_size = request.form.get('gill_size'),
-            gill_color = request.form.get('gill_color'),
-            stalk_root = request.form.get('stalk_root'),
-            stalk_surface_above_ring = request.form.get('stalk_surface_above_ring'),
-            stalk_surface_below_ring = request.form.get('stalk_surface_below_ring'),
-            ring_type = request.form.get('ring_type'),
-            spore_print_color = request.form.get('spore_print_color'),
-            population = request.form.get('population'),
-            habitat = request.form.get('habitat')
-        )
+            cement = request.form.get('cement'), # don't need to convert to float since catagorical data form drop down menu
+            blast_furnace_slag= request.form.get('blast_furnace_slag'),
+            water = request.form.get('water'),
+            superplasticizer = request.form.get('superplasticizer'),
+            coarse_aggregate = request.form.get('coarse_aggregate'),
+            fine_aggregate = request.form.get('fine_aggregate'),
+            age = request.form.get('age')
+            )
         final_new_data=data.get_data_as_dataframe()
         predict_pipeline=PredictPipeline()
         pred=predict_pipeline.predict(final_new_data)
 
-        target_map= {
-                "poisonous": 0, 
-                "edible": 1
-                }
+        results=round(pred)
 
-        results=pred
-
-        return render_template('results.html',final_result=list(target_map.keys())[list(target_map.values()).index(results)])     # return the results.html to form
+        return render_template('results.html',final_result=results)     # return the results.html to form
 
 
 
