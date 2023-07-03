@@ -20,13 +20,13 @@ def predict_datapoint():        # this funciton will also be present in form.htm
     
     else:
         data=CustomData(
-            cement = request.form.get('cement'), # don't need to convert to float since catagorical data form drop down menu
-            blast_furnace_slag= request.form.get('blast_furnace_slag'),
-            water = request.form.get('water'),
-            superplasticizer = request.form.get('superplasticizer'),
-            coarse_aggregate = request.form.get('coarse_aggregate'),
-            fine_aggregate = request.form.get('fine_aggregate'),
-            age = request.form.get('age')
+            cement = float(request.form.get('cement')), # convert to float; not needed for catagorical data since catagorical data form drop down menu
+            blast_furnace_slag= float(request.form.get('blast_furnace_slag')),
+            water = float(request.form.get('water')),
+            superplasticizer = float(request.form.get('superplasticizer')),
+            coarse_aggregate = float(request.form.get('coarse_aggregate')),
+            fine_aggregate = float(request.form.get('fine_aggregate')),
+            age = float(request.form.get('age'))
             )
         final_new_data=data.get_data_as_dataframe()
         predict_pipeline=PredictPipeline()

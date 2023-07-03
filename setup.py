@@ -16,7 +16,7 @@ def get_requirements(file_path:str)->List[str]:
 
 
 setup(
-    name='MushroomClassificationMLProject',
+    name='CompressiveStregthPredictionMLProject',
     version='0.0.1',
     author='Mrinal',
     author_email='mrinalkantisikdar@gmail.com',

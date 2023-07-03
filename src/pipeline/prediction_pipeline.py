@@ -30,49 +30,35 @@ class PredictPipeline:
         
 class CustomData: # give all features except the target feature
     def __init__(self,
-                 cap_surface:str,
-                 gill_spacing:str,
-                 gill_size:str,
-                 gill_color:str,
-                 stalk_root:str,
-                 stalk_surface_above_ring:str,
-                 stalk_surface_below_ring:str,
-                 ring_type:str,
-                 spore_print_color:str,
-                 population:str,
-                 habitat:str,
-                 bruises:str):
+                 cement:float,
+                 blast_furnace_slag:float,
+                 water:float,
+                 superplasticizer:float,
+                 fine_aggregate:float,
+                 age:float,
+                 coarse_aggregate:float,
+                 fly_ash:float):
         
-        self.cap_surface=cap_surface
-        self.bruises=bruises
-        self.gill_spacing=gill_spacing
-        self.gill_size=gill_size
-        self.gill_color=gill_color
-        self.stalk_root=stalk_root
-        self.stalk_surface_above_ring=stalk_surface_above_ring
-        self.stalk_surface_below_ring=stalk_surface_below_ring
-        self.ring_type=ring_type
-        self.spore_print_color=spore_print_color
-        self.population=population
-        self.habitat=habitat
-
-        
+        self.cement=cement
+        self.blast_furnace_slag=blast_furnace_slag
+        self.water=water
+        self.superplasticizer=superplasticizer
+        self.coarse_aggregate=coarse_aggregate
+        self.fine_aggregate=fine_aggregate
+        self.age=age
+        self.fly_ash=fly_ash
 
     def get_data_as_dataframe(self):
         try:
             custom_data_input_dict = {
-                'cap_surface':[self.cap_surface],
-                'bruises':[self.bruises],
-                'gill_spacing':[self.gill_spacing],
-                'gill_size':[self.gill_size],
-                'gill_color':[self.gill_color],
-                'stalk_root':[self.stalk_root],
-                'stalk_surface_above_ring':[self.stalk_surface_above_ring],
-                'stalk_surface_below_ring':[self.stalk_surface_below_ring],
-                'ring_type':[self.ring_type],
-                'spore_print_color':[self.spore_print_color],
-                'population':[self.population],
-                'habitat':[self.habitat]
+                'cement':[self.cement],
+                'blast_furnace_slag':[self.blast_furnace_slag],
+                'fly_ash':[self.fly_ash],
+                'water':[self.water],
+                'superplasticizer':[self.superplasticizer],
+                'coarse_aggregate':[self.coarse_aggregate],
+                'fine_aggregate':[self.fine_aggregate],
+                'age':[self.age]
             }
             df = pd.DataFrame(custom_data_input_dict)
             logging.info('Dataframe Gathered')
